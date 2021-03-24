@@ -1,0 +1,11 @@
+# matlab autosave
+*.asv
+# instrukcje
+*.doc
+*.docx
+*.pdf
+
+Projekt2-membrana/*.doc
+Projekt2-membrana/*.docx
+Projekt2-membrana/*.pdf
+Projekt2-membrana/*.asv
