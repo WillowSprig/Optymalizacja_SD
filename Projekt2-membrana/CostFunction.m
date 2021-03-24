@@ -29,12 +29,14 @@
 %% Main call
 function J=CostFunction(X,Dat)
 
-if strcmp(Dat.CostProblem,'DTLZ2')
-    J=DTLZ2(X,Dat);
-elseif strcmp(Dat.CostProblem,'Membrana')
-    J = Membrana(X,Dat);
-    % Here comes the call for a cost function of your own multi objective
-    % problem. 
+    if strcmp(Dat.CostProblem,'DTLZ2')
+        J=DTLZ2(X,Dat);
+    elseif strcmp(Dat.CostProblem,'Membrana')
+        J = Membrana(X,Dat);
+        % Here comes the call for a cost function of your own multi objective
+        % problem. 
+    end
+
 end
 
 %% DTLZ2 Benchmark function. Defined in:
@@ -44,34 +46,34 @@ end
 % Report No. 112, Feb. 2001.
 function J=DTLZ2(X,Dat)
 
-Xpop=size(X,1);
-Nvar=Dat.NVAR;
-M=Dat.NOBJ;
-K=Nvar+1-M;
-J=ones(Xpop,M);
+    Xpop=size(X,1);
+    Nvar=Dat.NVAR;
+    M=Dat.NOBJ;
+    K=Nvar+1-M;
+    J=ones(Xpop,M);
 
-for xpop=1:Xpop
-    Gxm=(X(xpop,M:Nvar)-0.5*ones(1,K))*(X(xpop,M:Nvar)-0.5*ones(1,K))';
-    Cos=cos(X(xpop,1:M-1)*pi/2);
+    for xpop=1:Xpop
+        Gxm=(X(xpop,M:Nvar)-0.5*ones(1,K))*(X(xpop,M:Nvar)-0.5*ones(1,K))';
+        Cos=cos(X(xpop,1:M-1)*pi/2);
 
-    J(xpop,1)=prod(Cos)*(1+Gxm);
-    for nobj=1:M-1
-     J(xpop,nobj+1)=(J(xpop,1)/prod(Cos(1,M-nobj:M-1)))...
-         *sin(X(xpop,M-nobj)*pi/2);
+        J(xpop,1)=prod(Cos)*(1+Gxm);
+        for nobj=1:M-1
+         J(xpop,nobj+1)=(J(xpop,1)/prod(Cos(1,M-nobj:M-1)))...
+             *sin(X(xpop,M-nobj)*pi/2);
+        end
     end
+
 end
 
 %% Write your own cost function here....
 function J=Membrana(X,Dat)
     Xpop=size(X,1);
-Nvar=Dat.NVAR;
-M=Dat.NOBJ;
-K=Nvar+1-M;
-J=ones(Xpop,M);
+    M=Dat.NOBJ;
+    J=ones(Xpop,M);
 
-for xpop=1:Xpop
-    membrana_pure(X(xpop,:));
-end
+    for xpop=1:Xpop
+        J(xpop, :) = membrana_pure(X(xpop,:));
+    end
 end
 
 %% Release and bug report:

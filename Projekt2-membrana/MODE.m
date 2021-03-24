@@ -69,9 +69,10 @@ end
 if size(MODEDat.InitialPop,1)>=1
     Parent(1:size(MODEDat.InitialPop,1),:)=MODEDat.InitialPop;
 end
-for i=1:Xpop
-JxParent(i,:) = mop(Parent(i,:),MODEDat);
-end
+% for i=1:Xpop
+% JxParent(i,:) = mop(Parent(i,:),MODEDat);
+% end
+JxParent = mop(Parent,MODEDat);
 FES = FES+Xpop;   
 
 %% Evolution process
@@ -104,9 +105,10 @@ for n=1:Generaciones
 
     end
 
-    for i=1:Xpop
-        JxChild(i,:) = mop(Child(i,:),MODEDat);
-    end
+%     for i=1:Xpop
+%         JxChild(i,:) = mop(Child(i,:),MODEDat);
+%     end
+    JxChild = mop(Child,MODEDat);
     FES=FES+Xpop;
 
     %% Selection

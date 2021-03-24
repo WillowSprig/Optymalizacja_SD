@@ -1,4 +1,4 @@
-function [v_out]=membrana_pure(dane, Dat)
+function [v_out]=membrana_pure(dane)
 
 gridSize = 100;
 % h = 1/gridSize;

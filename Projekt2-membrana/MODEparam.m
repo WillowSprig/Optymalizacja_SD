@@ -40,7 +40,7 @@ clc;
 MODEDat.NOBJ = 2;                          % Number of objectives
 MODEDat.NRES = 0;                          % Number of constraints
 MODEDat.NVAR   = 11;                       % Numero of decision variables
-MODEDat.mop = str2func('membrana_pure');    % Cost function
+MODEDat.mop = str2func('CostFunction');    % Cost function
 MODEDat.CostProblem='Membrana';               % Cost function instance
 
 MODEDat.FieldD =[zeros(MODEDat.NVAR,1)...
