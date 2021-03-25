@@ -172,6 +172,8 @@ figure(123); hold on; grid on;
             figure(123); %hold on;
             plot(F(xpop,1),F(xpop,2),'dk','MarkerFaceColor','k');...
                % grid on; hold on;
+            xlabel('nieharmonicznoœæ')
+            ylabel('skomplikowanie kszta³tu')
         elseif Nobj==3
             figure(123); hold on;
             plot3(F(xpop,1),F(xpop,2),F(xpop,3),'dk','MarkerFaceColor','k');...
@@ -203,6 +205,8 @@ function PlotPFront(OUT,Dat)
             elseif Dat.NOBJ==2
                 figure(123);
                 plot(OUT.PFront(:,1),OUT.PFront(:,2),'*r'); grid on;
+                xlabel('nieharmonicznoœæ')
+                ylabel('skomplikowanie kszta³tu')
             elseif Dat.NOBJ==1
                 figure(123);
                 plot(Dat.CounterGEN,log(min(OUT.PFront(:,1))),'*r'); ...

@@ -1,19 +1,23 @@
 function out = shapeAssess(r_vec)
-
-    window = 10;
-    ov = .5;
-    step = window - floor(window*ov);
+%% wersja pierwszza 
+%     window = 10;
+%     ov = .5;
+%     step = window - floor(window*ov);
+%     
+%     kk = 1;
+%     for k = 1 : step : length(r_vec.rl) - step - 1
+%         slice = r_vec.rl(k : k + step - 1);
+%         par(kk) = max(slice) - min(slice);
+%         kk = kk + 1;
+%     end
+%     rest = step - (length(r_vec.rl) - k);
+%     slice = [r_vec.rl(k : end) r_vec.rl(1 : rest)];
+%     par(kk) = max(slice) - min(slice);
+%     
+%     out = max(par);
+%     
     
-    kk = 1;
-    for k = 1 : step : length(r_vec) - step - 1
-        slice = r_vec(k : k + step - 1);
-        par(kk) = max(slice) - min(slice);
-        kk = kk + 1;
-    end
-    rest = step - (length(r_vec) - k);
-    slice = [r_vec(k : end) r_vec(1 : rest)];
-    par(kk) = max(slice) - min(slice);
+%% wersja druga - wariancja 
     
-    out = max(par);
-
+      out=var(r_vec.rl);
 end
