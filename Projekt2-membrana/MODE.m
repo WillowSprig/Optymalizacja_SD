@@ -129,9 +129,9 @@ for n=1:Generaciones
     OUT.Param          = MODEDat;  % MODE Parameters
     MODEDat.CounterGEN = n;
     MODEDat.CounterFES = FES;
-    
-    [OUT MODEDat]=PrinterDisplay(OUT,MODEDat); % To print results on screen
-    
+    if strcmp(MODEDat.PrintResultIteration,'yes')
+        [OUT MODEDat]=PrinterDisplay(OUT,MODEDat); % To print results on screen
+    end
     if FES>MODEDat.MAXFUNEVALS || n>MODEDat.MAXGEN
         disp('Termination criteria reached.')
         break;
@@ -156,27 +156,30 @@ if strcmp(MODEDat.SaveResults,'yes')
 end
 disp('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
 
+
+% if strcmp(MODEDat.PlotPFront,'yes')                 %plot Pareto Front 
 F=OUT.PFront;
 figure(123); hold on; grid on;
-for xpop=1:size(F,1)
-    if Nobj==1
-        figure(123); hold on;
-        plot(MODEDat.CounterGEN,log(min(F(:,1))),'dk', ...
-            'MarkerFaceColor','k'); grid on; hold on;
-    elseif Nobj==2
-        figure(123); %hold on;
-        plot(F(xpop,1),F(xpop,2),'dk','MarkerFaceColor','k');...
-           % grid on; hold on;
-    elseif Nobj==3
-        figure(123); hold on;
-        plot3(F(xpop,1),F(xpop,2),F(xpop,3),'dk','MarkerFaceColor','k');...
-            grid on; hold on;
+    for xpop=1:size(F,1)
+        if Nobj==1
+            figure(123); hold on;
+            plot(MODEDat.CounterGEN,log(min(F(:,1))),'dk', ...
+                'MarkerFaceColor','k'); grid on; hold on;
+        elseif Nobj==2
+            figure(123); %hold on;
+            plot(F(xpop,1),F(xpop,2),'dk','MarkerFaceColor','k');...
+               % grid on; hold on;
+        elseif Nobj==3
+            figure(123); hold on;
+            plot3(F(xpop,1),F(xpop,2),F(xpop,3),'dk','MarkerFaceColor','k');...
+                grid on; hold on;
+        end
     end
-end
-
+% end
 %% Print and Display information
 % Modify at your convenience
 %
+
 function [OUT Dat]=PrinterDisplay(OUT,Dat)
 
 disp('------------------------------------------------')

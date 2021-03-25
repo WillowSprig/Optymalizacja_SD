@@ -44,40 +44,40 @@ v_out(2) = shapeAssess(r_vec);
 
 %%
 
-% dispOpt = 0; % 0 - 2D, 1 - 3D 2 - no figure
-% if dispOpt==2
-%     return
-% else
-% figure(1)
-%     subplot(3,3,1)
-%         spy(Mgrid)
-% 
-% x = -gridSize:gridSize;
-% y = -gridSize:gridSize;
-% 
-% colormap(jet)
-% for i=1:8
-%     u = NaN(2*gridSize+1);
-%     v = val(:,i);
-%     for k = 1:length(I)
-%       u(I(k),J(k)) = v(k);
-%     end
-%     subplot(3,3,i+1)
-%         surf(x,y,-u)
-%  title(num2str(freqRatio(i)),'FontSize',15)
-%         shading interp;
-%         switch dispOpt
-%             case 0
-%                 view(0,270)
-%                 axis equal
-% %                 colorbar
-%             case 1
-%                 light;
-%                 lighting phong;
-%                 camlight('left');
-%                 material metal
-%         end
-% end
+dispOpt = 2; % 0 - 2D, 1 - 3D 2 - no figure
+if dispOpt==2
+    return
+else
+figure(1)
+    subplot(3,3,1)
+        spy(Mgrid)
+
+x = -gridSize:gridSize;
+y = -gridSize:gridSize;
+
+colormap(jet)
+for i=1:8
+    u = NaN(2*gridSize+1);
+    v = val(:,i);
+    for k = 1:length(I)
+      u(I(k),J(k)) = v(k);
+    end
+    subplot(3,3,i+1)
+        surf(x,y,-u)
+ title(num2str(freqRatio(i)),'FontSize',15)
+        shading interp;
+        switch dispOpt
+            case 0
+                view(0,270)
+                axis equal
+%                 colorbar
+            case 1
+                light;
+                lighting phong;
+                camlight('left');
+                material metal
+        end
+end
 
 % save membrana
 end

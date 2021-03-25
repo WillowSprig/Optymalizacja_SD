@@ -66,13 +66,17 @@ MODEDat.Pm= 0.2;                           % Croosover Probability
 %% Other variables
 %
 MODEDat.InitialPop=[];                     % Initial population (if any)
-MODEDat.MAXGEN =10000;                     % Generation bound
+MODEDat.MAXGEN =30;                     % Generation bound
 MODEDat.MAXFUNEVALS = 150*MODEDat.NVAR...  % Function evaluations bound
     *MODEDat.NOBJ;                         
 MODEDat.SaveResults='yes';                 % Write 'yes' if you want to 
                                            % save your results after the
                                            % optimization process;
                                            % otherwise, write 'no';
+                                           
+MODEDat.PrintResultIteration='yes';        %Print information about iteration
+%MODEDat.PlotPFront='yes';                  %Plot Pareto Front
+
 %% Initialization (don't modify)
 MODEDat.CounterGEN=0;
 MODEDat.CounterFES=0;
