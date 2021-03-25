@@ -132,6 +132,9 @@ for n=1:Generaciones
     if strcmp(MODEDat.PrintResultIteration,'yes')
         [OUT MODEDat]=PrinterDisplay(OUT,MODEDat); % To print results on screen
     end
+    if strcmp(MODEDat.PlotPFront,'yes')
+        PlotPFront(OUT,MODEDat); % To print results on screen
+    end
     if FES>MODEDat.MAXFUNEVALS || n>MODEDat.MAXGEN
         disp('Termination criteria reached.')
         break;
@@ -157,7 +160,7 @@ end
 disp('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
 
 
-% if strcmp(MODEDat.PlotPFront,'yes')                 %plot Pareto Front 
+
 F=OUT.PFront;
 figure(123); hold on; grid on;
     for xpop=1:size(F,1)
@@ -175,10 +178,11 @@ figure(123); hold on; grid on;
                 grid on; hold on;
         end
     end
-% end
+
 %% Print and Display information
 % Modify at your convenience
 %
+end
 
 function [OUT Dat]=PrinterDisplay(OUT,Dat)
 
@@ -187,27 +191,30 @@ disp(['Generation: ' num2str(Dat.CounterGEN)]);
 disp(['FEs: ' num2str(Dat.CounterFES)]);
 disp(['Pareto Front Size: ' mat2str(size(OUT.PFront,1))]);
 disp('------------------------------------------------')
-
-if mod(Dat.CounterGEN,1)==0
-    if Dat.NOBJ==3
-        figure(123);
-        plot3(OUT.PFront(:,1),OUT.PFront(:,2),OUT.PFront(:,3),'*r'); 
-        grid on;
-    elseif Dat.NOBJ==2
-        figure(123);
-        plot(OUT.PFront(:,1),OUT.PFront(:,2),'*r'); grid on;
-    elseif Dat.NOBJ==1
-        figure(123);
-        plot(Dat.CounterGEN,log(min(OUT.PFront(:,1))),'*r'); ...
-            grid on; hold on;
-    end
 end
 
+function PlotPFront(OUT,Dat)
+     
+        if mod(Dat.CounterGEN,1)==0
+            if Dat.NOBJ==3
+                figure(123);
+                plot3(OUT.PFront(:,1),OUT.PFront(:,2),OUT.PFront(:,3),'*r'); 
+                grid on;
+            elseif Dat.NOBJ==2
+                figure(123);
+                plot(OUT.PFront(:,1),OUT.PFront(:,2),'*r'); grid on;
+            elseif Dat.NOBJ==1
+                figure(123);
+                plot(Dat.CounterGEN,log(min(OUT.PFront(:,1))),'*r'); ...
+                    grid on; hold on;
+            end
+        end
+end
 %% Dominance Filter
 %
 % A filter based on dominance criteria
 %
-function [Frente Conjunto]=DominanceFilter(F,C)
+function [Frente, Conjunto]=DominanceFilter(F,C)
 
 Xpop=size(F,1);
 Nobj=size(F,2);
@@ -241,7 +248,7 @@ for xpop=1:Xpop
 end
 Frente=Frente(1:k,:);
 Conjunto=Conjunto(1:k,:);
-
+end
 %% Release and bug report:
 %
 % November 2012: Initial release

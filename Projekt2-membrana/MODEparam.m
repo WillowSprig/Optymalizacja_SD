@@ -75,7 +75,7 @@ MODEDat.SaveResults='yes';                 % Write 'yes' if you want to
                                            % otherwise, write 'no';
                                            
 MODEDat.PrintResultIteration='yes';        %Print information about iteration
-%MODEDat.PlotPFront='yes';                  %Plot Pareto Front
+MODEDat.PlotPFront='no';                    %update and display Pareto Front after each iteration 
 
 %% Initialization (don't modify)
 MODEDat.CounterGEN=0;
