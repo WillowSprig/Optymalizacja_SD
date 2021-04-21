@@ -3,12 +3,12 @@ close all
 
 bee = struct('scale', [], 'C', [], 'CF', []);
 
-swarm_size = 30;
-max_iter = 1200;
-max_C = 100;
+swarm_size = 50;
+max_iter = 200;
+max_C = 50;
 scale_bounds = [.33 10; .25 3; 1/38 5.3; .2 2];
 Nvar = 4;
-a_max = .4;
+a_max = .5;
 
 %% initialization
 
@@ -57,7 +57,7 @@ for it = 1 : max_iter
     for b = 1 : swarm_size
         rand_bee = RouletteWheelSelection(fm./sum(fm));
         while rand_bee == b
-            rand_bee = RouletteWheelSelection(fm/sum(fm)); % czy mo¿emy wylosowaæ tê sam¹?
+            rand_bee = RouletteWheelSelection(fm/sum(fm));
         end
         acc = 2 * (rand - .5) * a_max;
         temp.scale = bee(b).scale + acc * (bee(b).scale - bee(rand_bee).scale);
@@ -97,7 +97,11 @@ end
 BestCost = bestBee(it).CF
 
 figure
-plot(CF_plot)
+set(gcf, 'color', 'white', 'PaperOrientation', 'landscape')
+plot(CF_plot, 'linewidth', 1.5)
+grid on
 set(gca, 'fontsize', 20)
 xlabel('Nr iteracji', 'fontsize', 20)
 ylabel('Wartoœæ funkcji kosztu', 'fontsize', 20)
+
+
