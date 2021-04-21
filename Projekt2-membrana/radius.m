@@ -15,5 +15,5 @@ function [r, r_out] = radius(theta,a0,a,b)
 %             r = r + a(i)*sin((i)*theta) + b(i-1)*cos((i)*theta); 
     end
 %  polar(thetal,rl)
-    r_out.rl=rl;
+    r_out.rl=rl-min(rl)+a0;
     r=r-min(min(r))+a0;  %żeby funkcja dawała zawsze dodatnie wartości

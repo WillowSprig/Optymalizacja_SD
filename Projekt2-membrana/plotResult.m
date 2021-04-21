@@ -1,4 +1,4 @@
-function [out] = plotResult(IN)
+function [out] = plotResult(IN,Dat)
 
 
 %type OUT variable as IN
@@ -31,20 +31,21 @@ A = delsq(Mgrid);   %/h^2;
 lambda = diag(Mlambda);
 % lambda = 2*mu./(sqrt(1 + mu*h^2/2) + 1);
 freqRatio = (sqrt(lambda/lambda(1)));
+% freqRatio =(lambda/lambda(1));
 %%
 %nieharmonicznoÅ›Ä‡
 freqN = length(freqRatio);
 
 disharmonicityM = zeros(freqN-1,4);
-for i=1:4               % choosing base frequency
+for i=2:5               % choosing base frequency
     rFreq = freqRatio(2:end)*i;
-    disharmonicityM(:,i) = ((rFreq-round(rFreq)).^2);
+    disharmonicityM(:,i-1) = ((rFreq-round(rFreq)).^2);
 end
 [~,Nharm] = min(sum(disharmonicityM.*repmat((1./freqRatio(2:end)),1,4)));
 % [Vharm,Nharm2] = min(sum(disharmonicityM.*repmat((1./freqRatio(2:end)),1,4)));
 disharmonicity = disharmonicityM(:,Nharm)*400; 
 
-ampS=min(sum(abs(val(:,2:10)).*disharmonicity',2));
+ampS=mean(sum(abs(val(:,2:10)).*disharmonicity',2));
 v_out(1) = sum(ampS);
 
 v_out(2) = shapeAssess(r_vec);
@@ -90,5 +91,21 @@ for i=1:8
 end
 
 end
+            if Dat.NOBJ==3
+                figure(123);
+                plot3(IN.PFront(:,1),IN.PFront(:,2),IN.PFront(:,3),'*r'); 
+                grid on;
+            elseif Dat.NOBJ==2
+                figure(123);
+                plot(IN.PFront(:,1),IN.PFront(:,2),'*r'); grid on;
+                xlabel('nieharmonicznoœæ')
+                ylabel('skomplikowanie kszta³tu')
+            elseif Dat.NOBJ==1
+                figure(123);
+                plot(Dat.CounterGEN,log(min(IN.PFront(:,1))),'*r'); ...
+                    grid on; hold on;
+            end
+
+
 end
 

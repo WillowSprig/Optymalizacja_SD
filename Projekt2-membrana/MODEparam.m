@@ -59,15 +59,15 @@ MODEDat.Initial=[zeros(MODEDat.NVAR,1)...
 % state-of-the-art. IEEE Transactions on Evolutionary Computation. Vol 15,
 % 4 - 31.
 %
-MODEDat.XPOP = 5*MODEDat.NOBJ;             % Population size
+MODEDat.XPOP = 15*MODEDat.NOBJ;             % Population size
 MODEDat.Esc = 0.5;                         % Scaling factor
 MODEDat.Pm= 0.2;                           % Croosover Probability
 %
 %% Other variables
 %
 MODEDat.InitialPop=[];                     % Initial population (if any)
-MODEDat.MAXGEN =30;                     % Generation bound
-MODEDat.MAXFUNEVALS = 150*MODEDat.NVAR...  % Function evaluations bound
+MODEDat.MAXGEN =1000;                     % Generation bound
+MODEDat.MAXFUNEVALS = 300*MODEDat.NVAR...  % Function evaluations bound
     *MODEDat.NOBJ;                         
 MODEDat.SaveResults='yes';                 % Write 'yes' if you want to 
                                            % save your results after the

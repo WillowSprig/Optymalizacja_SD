@@ -18,6 +18,26 @@ function out = shapeAssess(r_vec)
 %     
     
 %% wersja druga - wariancja 
-    
-      out=var(r_vec.rl);
+%     
+%       out=var(r_vec.rl);
+
+%% wersja trzecia - druga pochodna 
+% 
+% out = gradient(gradient(r_vec.rl));
+% out = min(abs(out));
+
+%% wersja czwarta - miesjca zerowe i powierzchnia
+
+% nz = Nzerocross(gradient(r_vec.rl));
+% s = trapz(r_vec.rl+1);
+% out = s * nz;
+
+%% wersja pi¹ta
+a = max(r_vec.rl)-min(r_vec.rl);
+s = trapz(r_vec.rl+r_vec.a0);
+out =100* a^2 / s;
+
+
+
+
 end

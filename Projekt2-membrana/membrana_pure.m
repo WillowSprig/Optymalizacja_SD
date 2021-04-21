@@ -24,20 +24,22 @@ A = delsq(Mgrid);   %/h^2;
 lambda = diag(Mlambda);
 % lambda = 2*mu./(sqrt(1 + mu*h^2/2) + 1);
 freqRatio = (sqrt(lambda/lambda(1)));
+% freqRatio = lambda/lambda(1);
 %%
 %nieharmoniczność
 freqN = length(freqRatio);
 
 disharmonicityM = zeros(freqN-1,4);
-for i=1:4               % choosing base frequency
+for i=2:5               % choosing base frequency
     rFreq = freqRatio(2:end)*i;
-    disharmonicityM(:,i) = ((rFreq-round(rFreq)).^2);
+    disharmonicityM(:,i-1) = ((rFreq-round(rFreq)).^2);
 end
 [~,Nharm] = min(sum(disharmonicityM.*repmat((1./freqRatio(2:end)),1,4)));
 % [Vharm,Nharm2] = min(sum(disharmonicityM.*repmat((1./freqRatio(2:end)),1,4)));
 disharmonicity = disharmonicityM(:,Nharm)*400; 
 
-ampS=min(sum(abs(val(:,2:10)).*disharmonicity',2));
+ampS=mean(sum(abs(val(:,2:10)).*disharmonicity',2));
+
 v_out(1) = sum(ampS);
 
 v_out(2) = shapeAssess(r_vec);
